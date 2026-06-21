@@ -5,11 +5,19 @@ import people from './lib/people.json';
 const formattedPeople = people.map((person) => {
   const age = person.died - person.born;
   const century = Math.ceil(person.died / 100);
+  let gender = person.sex;
+
+  if (person.sex === 'm') {
+    gender = 'Male';
+  } else if (person.sex === 'f') {
+    gender = 'Female';
+  }
 
   return {
     ...person,
     age,
     century,
+    gender,
   };
 });
 
@@ -25,7 +33,7 @@ formattedPeople.forEach((person) => {
   const tdCentury = document.createElement('td');
 
   tdName.innerHTML = person.name;
-  tdSex.innerHTML = person.sex;
+  tdSex.innerHTML = person.gender;
   tdBorn.innerHTML = person.born;
   tdDied.innerHTML = person.died;
   tdAge.innerHTML = person.age;
